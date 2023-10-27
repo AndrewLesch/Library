@@ -1,5 +1,6 @@
-import Footer from "@/components/Footer/Footer"
-import Header from "@/components/Header/Header"
+'use client'
+import Footer from "@/components/Footer"
+import Header from "@/components/Header"
 
 export const metadata = {
   title: 'Books',
