@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { faAngleRight, faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const QuoteSlider = ({ quotes }: any) => {
+export default function QuoteSlider ({ quotes }: any){
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
@@ -13,7 +13,7 @@ const QuoteSlider = ({ quotes }: any) => {
       } else {
         setCurrentSlide(currentSlide + 1);
       }
-    }, 3000); // 20 секунд
+    }, 3000);
 
     return () => clearInterval(interval);
   }, [currentSlide, quotes]);
@@ -59,5 +59,3 @@ const QuoteSlider = ({ quotes }: any) => {
     </div>
   );
 };
-
-export default QuoteSlider;
