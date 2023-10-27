@@ -1,17 +1,17 @@
 import '@/app/globals.css'
-import QuoteSlider from '@/components/Slider/Slider';
+import QuoteSlider from '@/components/Slider';
 import Link from 'next/link';
 
 export default function Home() {
   const quotes = [
     {
-      text: 'Read boRead booksRead booksRead booksRead booksRead booksRead booksRead booksoks',
+      text: 'Read books. Add some books which you read in past time',
     },
     {
-      text: 'Readable books',
+      text: 'Readable books. Add some books which you read in current time',
     },
     {
-      text: 'Awaiting books',
+      text: 'Awaiting books. Add some books which you want to read in feature',
     },
   ];
 
