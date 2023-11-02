@@ -1,6 +1,7 @@
 import fetchPathGetUser from "./constants";
 
 const getUser = (token: any, setUser: any) => {
+  console.log(token)
   fetch(fetchPathGetUser, {
         method: 'GET',
         headers: {

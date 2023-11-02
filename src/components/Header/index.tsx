@@ -1,3 +1,4 @@
+'use client'
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import '@/app/globals.css'
@@ -14,15 +15,17 @@ import logout from "@/api/logout";
 export default function Header() {
   const [user, setUser] = useState(emptyUser)
 
-  const token = getToken();
   
   useEffect(() => {
+    const token = getToken();
+    console.log(token)
     if (token) {
       getUser(token, setUser)
     }
   }, []);
 
   const handleLogout = () => {
+    const token = getToken();
     if (token) {
       logout(token, setUser)
     }
@@ -42,7 +45,7 @@ export default function Header() {
         <Link className="text-xl" href="/read">
           Read
         </Link>
-        <Link className="text-xl" href="/waiting">
+        <Link className="text-xl" href="/awaiting">
           Waiting
         </Link>
       </div>
