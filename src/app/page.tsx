@@ -22,7 +22,7 @@ export default function Home() {
         <h3 className="text-xl mt-5 pb-32">Lets add a few books and create some reviews! Enjoy!</h3>
         <QuoteSlider quotes={quotes} />
         <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full shadow-lg">
-          <Link href='/book'>Add book</Link>
+          <Link href='/book-form'>Add book</Link>
         </button>
       </div>
       <div className="container w-2/5 text-center">IMG</div>
