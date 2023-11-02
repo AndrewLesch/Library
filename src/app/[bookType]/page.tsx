@@ -29,40 +29,50 @@ export default function BookTypePage() {
   };
 
   return (
-    <div className="w-4/5 mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Книги по типу: {bookType}</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {currentBooks?.map((book: any, index) => (
-          <Link href='/[bookType]/[id]' as={`/${bookType}/${book.id}`}>
-            <div
-              key={book.id}
-              className="md:w-3/5 bg-gray-400 p-4 mx-auto rounded-lg shadow-md cursor-pointer hover:shadow-lg transition-transform transform hover:-translate-y-1 h-80"
-            >
-              <h2 className="text-lg font-semibold">{book.title}</h2>
-              <p className="text-gray-600 text-sm">{book.author}</p>
-            </div>
-          </Link>
+<div className="container mx-auto min-h-120">
+  <h1 className="text-2xl font-bold mb-4">Книги по типу: {bookType}</h1>
+  <div className="grid grid-cols-2 gap-20">
+    {currentBooks?.map((book: any) => (
+      <Link href="/[bookType]/[id]" className='w-2/3 mx-auto' key={book.id} as={`/${bookType}/${book.id}`}>
+<div
+  key={book.id}
+  className="bg-gray-400 mx-auto rounded-lg shadow-md cursor-pointer hover:shadow-lg transition-transform transform hover:-translate-y-1 h-auto"
+>
+  <div className="relative">
+    <img
+      src={`http://localhost:3001/` + book.coverPath}
+      alt={book.title}
+      className="w-full h-96 object-cover rounded-t-lg"
+    />
+  </div>
+  <div className="p-4 text-center">
+    <h2 className="text-lg font-semibold">{book.title}</h2>
+    <p className="text-gray-600 text-sm">{book.author}</p>
+  </div>
+</div>
+
+
+
+      </Link>
+    ))}
+  </div>
+  <div className="flex justify-center mt-4">
+    {totalPages > 1 && (
+      <div className="space-x-2">
+        {Array.from({ length: totalPages }).map((_, page) => (
+          <button
+            key={page}
+            className={`px-2 py-1 border rounded ${
+              currentPage === page + 1 ? 'bg-blue-500 text-white' : 'border-gray-300'
+            }`}
+            onClick={() => handlePageChange(page + 1)}
+          >
+            {page + 1}
+          </button>
         ))}
       </div>
-      <div className="flex justify-center mt-4">
-        {totalPages > 1 && (
-          <div className="space-x-2">
-            {Array.from({ length: totalPages }).map((_, page) => (
-              <button
-                key={page}
-                className={`px-2 py-1 border rounded ${
-                  currentPage === page + 1
-                    ? 'bg-blue-500 text-white'
-                    : 'border-gray-300'
-                }`}
-                onClick={() => handlePageChange(page + 1)}
-              >
-                {page + 1}
-              </button>
-            ))}
-          </div>
-        )}
-      </div>
-    </div>
-  );
+    )}
+  </div>
+</div>
+  )
 }
