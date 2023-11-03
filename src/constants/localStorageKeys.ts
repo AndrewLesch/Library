@@ -1,1 +1,1 @@
-export const TOKEN_LS_KEY: string = 'token'
+export const TOKEN_LS_KEY: string = 'token';

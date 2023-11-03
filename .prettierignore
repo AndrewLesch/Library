@@ -1,0 +1,10 @@
+build
+node_modules
+tsconfig.json
+webpack.config.js
+README.md
+package.json
+package-lock.json
+.prettierrc
+.github
+tailwind.config.js
