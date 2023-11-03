@@ -1,4 +1,4 @@
-import fetchPathAddBook from "./constants";
+import fetchPathAddBook from './constants';
 
 const addBook = (token: any, bookData: any) => {
   const formData = new FormData();
@@ -8,12 +8,12 @@ const addBook = (token: any, bookData: any) => {
 
   // Добавляем изображение книги как файл в FormData с ключом 'img'
   formData.append('img', bookData.img);
-  console.log(typeof bookData.img)
+  console.log(typeof bookData.img);
 
   fetch(fetchPathAddBook, {
     method: 'POST',
     headers: {
-      'Authorization': token,
+      Authorization: token,
     },
     body: formData,
   })
@@ -31,6 +31,6 @@ const addBook = (token: any, bookData: any) => {
     .catch((error) => {
       console.error(error);
     });
-}
+};
 
 export default addBook;

@@ -1,6 +1,6 @@
-
-'use client'
+'use client';
 import React, { useEffect, useState } from 'react';
+
 import getBookById from '@/api/getBookById';
 import getToken from '@/utils/workWithTokens/getToken';
 
@@ -16,8 +16,8 @@ export default function Book({ params: { id } }: Props) {
   useEffect(() => {
     const token = getToken();
     getBookById(token, id, setBook);
-    console.log(book)
-  }, [id]);
+    console.log(book);
+  }, [id, book]);
 
   return (
     <div className="bg-white p-4 shadow-md rounded-md">
@@ -62,7 +62,8 @@ export default function Book({ params: { id } }: Props) {
           </div>
           <div className="mb-4">
             <p>
-              <span className="font-semibold">Start Date:</span> {book.startDate}
+              <span className="font-semibold">Start Date:</span>{' '}
+              {book.startDate}
             </p>
           </div>
           <div className="mb-4">
@@ -77,7 +78,8 @@ export default function Book({ params: { id } }: Props) {
           </div>
           <div className="mb-4">
             <p>
-              <span className="font-semibold">Awaiting Date:</span> {book.awaitingDate}
+              <span className="font-semibold">Awaiting Date:</span>{' '}
+              {book.awaitingDate}
             </p>
           </div>
         </div>

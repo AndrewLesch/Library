@@ -1,11 +1,12 @@
-import login from "@/api/login";
-import emptyUser from "@/constants/emptyUser";
-import register from "@/api/register";
-import React, { useState } from "react";
+import React, { useState } from 'react';
+
+import login from '@/api/login';
+import register from '@/api/register';
+import emptyUser from '@/constants/emptyUser';
 
 export default function Modal({ setUser }: any) {
   const [isOpen, setIsOpen] = useState(false);
-  const [modalUser, setModalUser] = useState(emptyUser)
+  const [modalUser, setModalUser] = useState(emptyUser);
   const [isRegistering, setIsRegistering] = useState(false);
 
   const openModal = () => {
@@ -13,22 +14,21 @@ export default function Modal({ setUser }: any) {
   };
 
   const closeModal = () => {
-    setIsRegistering(false)
+    setIsRegistering(false);
     setIsOpen(false);
   };
 
   const handleUserDataChange = (e: any, field: string) => {
-    setModalUser({...modalUser, [field]: e.target.value})
-  }
+    setModalUser({ ...modalUser, [field]: e.target.value });
+  };
 
   const handleLogin = () => {
-    login(modalUser, setUser)
+    login(modalUser, setUser);
     closeModal();
   };
 
-  
   const handleRegister = () => {
-    register(modalUser, setIsRegistering, setIsOpen)
+    register(modalUser, setIsRegistering, setIsOpen);
     closeModal();
   };
 
@@ -81,21 +81,21 @@ export default function Modal({ setUser }: any) {
                 className="w-full border p-2 rounded mt-2"
               />
               <div className="mt-4 flex justify-between">
-                  <button
-                    type="button"
-                    onClick={handleRegister}
-                    className="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600"
-                  >
-                    Registration
-                  </button>
-                  <button
-                    type="button"
-                    onClick={closeModal}
-                    className="bg-gray-500 text-white font-semibold py-2 px-4 rounded hover:bg-gray-600"
-                  >
-                    Cancel
-                  </button>
-                </div>
+                <button
+                  type="button"
+                  onClick={handleRegister}
+                  className="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600"
+                >
+                  Registration
+                </button>
+                <button
+                  type="button"
+                  onClick={closeModal}
+                  className="bg-gray-500 text-white font-semibold py-2 px-4 rounded hover:bg-gray-600"
+                >
+                  Cancel
+                </button>
+              </div>
             </div>
           ) : (
             // Форма входа
@@ -124,35 +124,34 @@ export default function Modal({ setUser }: any) {
                 className="w-full border p-2 rounded mt-2"
               />
               <br />
-                <div className="mt-4 flex justify-between">
-                  <button
-                    type="button"
-                    onClick={handleLogin}
-                    className="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600"
-                  >
-                    Login
-                  </button>
-                  <button
-                    type="button"
-                    onClick={closeModal}
-                    className="bg-gray-500 text-white font-semibold py-2 px-4 rounded hover:bg-gray-600"
-                  >
-                    Cancel
-                  </button>
-                </div>
-
-                <p className="mt-4 text-center">
-                  No account?{" "}
-                  <button
-                    type="button"
-                    onClick={() => setIsRegistering(true)}
-                    className="text-blue-500 font-semibold hover:underline"
-                  >
-                    Registration
-                  </button>
-                </p>
+              <div className="mt-4 flex justify-between">
+                <button
+                  type="button"
+                  onClick={handleLogin}
+                  className="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600"
+                >
+                  Login
+                </button>
+                <button
+                  type="button"
+                  onClick={closeModal}
+                  className="bg-gray-500 text-white font-semibold py-2 px-4 rounded hover:bg-gray-600"
+                >
+                  Cancel
+                </button>
               </div>
 
+              <p className="mt-4 text-center">
+                No account?{' '}
+                <button
+                  type="button"
+                  onClick={() => setIsRegistering(true)}
+                  className="text-blue-500 font-semibold hover:underline"
+                >
+                  Registration
+                </button>
+              </p>
+            </div>
           )}
         </form>
       )}

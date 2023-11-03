@@ -1,9 +1,9 @@
-'use client'
-import { useState, useEffect } from 'react';
-import { faAngleRight, faAngleLeft } from "@fortawesome/free-solid-svg-icons";
+'use client';
+import { useEffect, useState } from 'react';
+import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export default function QuoteSlider ({ quotes }: any){
+export default function QuoteSlider({ quotes }: any) {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
@@ -58,4 +58,4 @@ export default function QuoteSlider ({ quotes }: any){
       </button>
     </div>
   );
-};
+}
