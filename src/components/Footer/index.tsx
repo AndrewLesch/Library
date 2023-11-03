@@ -1,7 +1,9 @@
-export default function Footer () {
+export default function Footer() {
   return (
     <footer className="container mx-auto justify-between flex items-center mt-40">
-      <h2  className="w-1/4 flex items-center">Check my another projects: IMG GIT</h2>
+      <h2 className="w-1/4 flex items-center">
+        Check my another projects: IMG GIT
+      </h2>
       <div className="w-1/4 flex items-center">
         <h2>Used technologies</h2>
         <h3>тут написать различные технологии</h3>
@@ -15,5 +17,5 @@ export default function Footer () {
         </div>
       </div>
     </footer>
-  )
+  );
 }

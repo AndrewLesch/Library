@@ -1,8 +1,10 @@
-'use client'
-import { useState } from "react"
-import '@/app/globals.css'
-import getToken from "@/utils/workWithTokens/getToken";
-import addBook from "@/api/addBook";
+'use client';
+import { useState } from 'react';
+
+import addBook from '@/api/addBook';
+import getToken from '@/utils/workWithTokens/getToken';
+
+import '@/app/globals.css';
 
 const empyBook = {
   name: 'Введите имя книги',
@@ -12,12 +14,12 @@ const empyBook = {
   language: '',
   rating: 0,
   pages: 0,
-  startDate: '', 
+  startDate: '',
   endDate: '',
   review: '',
   awaitingDate: '',
-  img: ''
-}
+  img: '',
+};
 
 export default function BookForm() {
   const [book, setBook] = useState(empyBook);
@@ -26,17 +28,16 @@ export default function BookForm() {
     setBook({ ...book, [field]: e.target.value });
   };
 
-
   const handleFileChange = (e: any) => {
-    setBook({...book, img: e.target.files[0]})
-  }
+    setBook({ ...book, img: e.target.files[0] });
+  };
 
   const handleAddBook = () => {
-    event?.preventDefault()
+    event?.preventDefault();
     const token = getToken();
-    console.log(book)
-    addBook(token, book)
-  }
+    console.log(book);
+    addBook(token, book);
+  };
 
   return (
     <form className="container mx-auto mt-4">
@@ -95,60 +96,56 @@ export default function BookForm() {
         </select>
       </div>
       <input type="file" onChange={(e) => handleFileChange(e)}></input>
-      
-      {book.type === "read" ? (
+
+      {book.type === 'read' ? (
         <div>
           Enter book rating:
-         <input
-          required
-          type="number"
-          max={10}
-          placeholder="Оценка книги"
-          value={book.rating}
-          onChange={(e) => handleFieldChange(e, 'rating')}
-          >
-          </input>
+          <input
+            required
+            type="number"
+            max={10}
+            placeholder="Оценка книги"
+            value={book.rating}
+            onChange={(e) => handleFieldChange(e, 'rating')}
+          ></input>
           Enter book pages:
           <input
-          required
-          type="number"
-          placeholder="Количество страниц"
-          value={book.pages}
-          onChange={(e) => handleFieldChange(e, 'pages')}
-          >
-          </input>
+            required
+            type="number"
+            placeholder="Количество страниц"
+            value={book.pages}
+            onChange={(e) => handleFieldChange(e, 'pages')}
+          ></input>
           Enter book start date:
           <input
-          required
+            required
             type="date"
             value={book.startDate}
             onChange={(e) => handleFieldChange(e, 'startDate')}
-            ></input>
-            Enter book end Date:
+          ></input>
+          Enter book end Date:
           <input
-          required
+            required
             type="date"
             value={book.endDate}
             onChange={(e) => handleFieldChange(e, 'endDate')}
-            ></input> 
-            Enter book review:
-            <input
+          ></input>
+          Enter book review:
+          <input
             type="text"
             value={book.review}
             onChange={(e) => handleFieldChange(e, 'review')}
-            ></input> 
+          ></input>
         </div>
-      ) : book.type === "readable" ? (
+      ) : book.type === 'readable' ? (
+        <div></div>
+      ) : book.type === 'awaiting' ? (
         <div>
-        
-        </div>
-      ) : book.type === "awaiting" ? (
-        <div>
-            <input
+          <input
             type="date"
             value={book.awaitingDate}
             onChange={(e) => handleFieldChange(e, 'awaitingDate')}
-            ></input> 
+          ></input>
         </div>
       ) : null}
       <button onClick={handleAddBook}>Add book</button>

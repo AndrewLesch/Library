@@ -1,3 +1,3 @@
-const fetchPathLogin: string = "http://localhost:3001/login"
+const fetchPathLogin: string = 'http://localhost:3001/login';
 
-export default fetchPathLogin
+export default fetchPathLogin;

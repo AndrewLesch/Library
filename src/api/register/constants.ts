@@ -1,3 +1,3 @@
-const fetchPathRegister: string = "http://localhost:3001/register"
+const fetchPathRegister: string = 'http://localhost:3001/register';
 
-export default fetchPathRegister
+export default fetchPathRegister;

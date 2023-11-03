@@ -1,38 +1,46 @@
-'use client'
-import React, { useState, useEffect } from "react";
-import Link from "next/link";
-import '@/app/globals.css'
+'use client';
+import React, { useEffect, useState } from 'react';
+import {
+  faAdjust,
+  faBook,
+  faLanguage,
+  faUser,
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Link from 'next/link';
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faAdjust, faLanguage, faBook } from "@fortawesome/free-solid-svg-icons";
-import Modal from "../Modal";
+import getUser from '@/api/getUser';
+import logout from '@/api/logout';
+import emptyUser from '@/constants/emptyUser';
+import getToken from '@/utils/workWithTokens/getToken';
 
-import getToken from "@/utils/workWithTokens/getToken";
-import emptyUser from "@/constants/emptyUser";
-import getUser from "@/api/getUser";
-import logout from "@/api/logout";
+import Modal from '../Modal';
+
+import '@/app/globals.css';
 
 export default function Header() {
-  const [user, setUser] = useState(emptyUser)
+  const [user, setUser] = useState(emptyUser);
 
-  
   useEffect(() => {
     const token = getToken();
-    console.log(token)
+    console.log(token);
     if (token) {
-      getUser(token, setUser)
+      getUser(token, setUser);
     }
   }, []);
 
   const handleLogout = () => {
     const token = getToken();
     if (token) {
-      logout(token, setUser)
+      logout(token, setUser);
     }
-  }
-  
+  };
+
   return (
-    <header className="container mx-auto justify-between flex items-center px-6 py-15 h-32 bg-yellow-100 rounded-lg">
+    <header
+      className="container mx-auto justify-between flex
+      items-center px-6 py-15 h-32 bg-yellow-100 rounded-lg"
+    >
       <div className="w-1/4 flex items-center">
         <Link href="/" className="mx-auto">
           <FontAwesomeIcon icon={faBook} className="text-sm w-20 h-20" />
@@ -57,7 +65,7 @@ export default function Header() {
             <button onClick={handleLogout}>Log out</button>
           </>
         ) : (
-          <Modal setUser={setUser}/>
+          <Modal setUser={setUser} />
         )}
         <FontAwesomeIcon icon={faAdjust} className="text-sm w-8 h-8" />
         <FontAwesomeIcon icon={faLanguage} className="text-sm w-12 h-12" />
