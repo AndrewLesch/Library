@@ -10,12 +10,14 @@ const logout = (token: any, setUser: any) => {
       Authorization: `Bearer ${token}`,
     },
   })
-    .then((response) => {
-      if (response.status === 200) {
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.successMessage) {
         removeToken();
         setUser(emptyUser);
+        alert(data.successMessage)
       } else {
-        console.error('Ошибка при логауте');
+        alert(data.errorMessage)
       }
     })
     .catch((error) => {

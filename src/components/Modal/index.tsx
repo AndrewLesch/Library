@@ -23,13 +23,21 @@ export default function Modal({ setUser }: any) {
   };
 
   const handleLogin = () => {
-    login(modalUser, setUser);
-    closeModal();
+    login(modalUser, setUser, closeModal);
   };
 
   const handleRegister = () => {
-    register(modalUser, setIsRegistering, setIsOpen);
-    closeModal();
+    register(modalUser, setIsRegistering);
+  };
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault(); 
+
+    if (isRegistering) {
+      handleRegister();
+    } else {
+      handleLogin();
+    }
   };
 
   return (
@@ -42,13 +50,14 @@ export default function Modal({ setUser }: any) {
       </button>
 
       {isOpen && (
-        <form className="fixed inset-0 flex items-center justify-center z-50">
+        <form className="fixed inset-0 flex items-center justify-center z-50" onSubmit={handleSubmit}>
           {isRegistering ? (
             <div className="bg-white p-4 rounded shadow">
               <label htmlFor="username" className="block font-semibold">
                 Login:
               </label>
               <input
+                required
                 type="text"
                 id="username"
                 name="username"
@@ -61,6 +70,7 @@ export default function Modal({ setUser }: any) {
                 Password:
               </label>
               <input
+                required
                 type="password"
                 id="password"
                 name="password"
@@ -73,7 +83,8 @@ export default function Modal({ setUser }: any) {
                 Email:
               </label>
               <input
-                type="text"
+                required
+                type="email"
                 id="email"
                 name="email"
                 value={modalUser.email}
@@ -82,8 +93,7 @@ export default function Modal({ setUser }: any) {
               />
               <div className="mt-4 flex justify-between">
                 <button
-                  type="button"
-                  onClick={handleRegister}
+                  type="submit"
                   className="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600"
                 >
                   Registration
@@ -98,12 +108,12 @@ export default function Modal({ setUser }: any) {
               </div>
             </div>
           ) : (
-            // Форма входа
             <div className="bg-white p-4 rounded shadow">
               <label htmlFor="username" className="block font-semibold">
                 Login:
               </label>
               <input
+                required
                 type="text"
                 id="username"
                 name="username"
@@ -116,6 +126,7 @@ export default function Modal({ setUser }: any) {
                 Password:
               </label>
               <input
+                required
                 type="password"
                 id="password"
                 name="password"
@@ -126,8 +137,7 @@ export default function Modal({ setUser }: any) {
               <br />
               <div className="mt-4 flex justify-between">
                 <button
-                  type="button"
-                  onClick={handleLogin}
+                  type="submit"
                   className="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600"
                 >
                   Login

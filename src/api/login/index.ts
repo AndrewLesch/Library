@@ -2,7 +2,7 @@ import setToken from '@/utils/workWithTokens/setToken';
 
 import fetchPathLogin from './constants';
 
-const login = (modalUser: any, setUser: any) => {
+const login = (modalUser: any, setUser: any, closeModal: any) => {
   fetch(fetchPathLogin, {
     method: 'POST',
     headers: {
@@ -15,6 +15,10 @@ const login = (modalUser: any, setUser: any) => {
       if (data.user) {
         setUser(data.user);
         setToken(data.token);
+        closeModal()
+        alert(data.successMessage)
+      } else {
+        alert(data.errorMessage)
       }
     })
     .catch((error) => {
