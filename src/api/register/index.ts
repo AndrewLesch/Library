@@ -1,6 +1,6 @@
 import fetchPathRegister from './constants';
 
-const register = (modalUser: any, setIsRegistering: any, setIsOpen: any) => {
+const register = (modalUser: any, setIsRegistering: any) => {
   fetch(fetchPathRegister, {
     method: 'POST',
     headers: {
@@ -10,9 +10,12 @@ const register = (modalUser: any, setIsRegistering: any, setIsOpen: any) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      if (data.user) {
+      if (data.successMessage) {
         setIsRegistering(false);
-        setIsOpen(true);
+        alert(data.successMessage)
+      } else {
+        alert(data.errorMessage)
+        console.error('Ошибка на сервере:', data.errorMessage);
       }
     })
     .catch((error) => {

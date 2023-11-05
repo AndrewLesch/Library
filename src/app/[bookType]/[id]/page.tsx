@@ -17,7 +17,7 @@ export default function Book({ params: { id } }: Props) {
     const token = getToken();
     getBookById(token, id, setBook);
     console.log(book);
-  }, [id, book]);
+  }, [id]);
 
   return (
     <div className="bg-white p-4 shadow-md rounded-md">
