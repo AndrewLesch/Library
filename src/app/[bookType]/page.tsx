@@ -1,6 +1,5 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -47,7 +46,7 @@ export default function BookTypePage() {
               hover:shadow-lg transition-transform transform hover:-translate-y-1 h-auto"
             >
               <div className="relative">
-                <Image
+                <img
                   src={`http://localhost:3001/` + book.coverPath}
                   alt={book.title}
                   className="w-full h-96 object-cover rounded-t-lg"

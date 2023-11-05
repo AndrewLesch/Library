@@ -9,7 +9,7 @@
     "lint": "next lint",
     "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
     "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
-    "pre-commit": "prettier --write . && next lint && git add .",
+    "pre-commit": "prettier --write . && next lint",
     "prepare": "husky install"
   },
   "dependencies": {
