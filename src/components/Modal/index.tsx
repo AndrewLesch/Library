@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 
-import login from '@/api/login';
 import register from '@/api/register';
 import emptyUser from '@/constants/emptyUser';
 
-export default function Modal({ setUser }: any) {
+export default function Modal() {
   const [isOpen, setIsOpen] = useState(false);
   const [modalUser, setModalUser] = useState(emptyUser);
   const [isRegistering, setIsRegistering] = useState(false);
@@ -22,16 +21,14 @@ export default function Modal({ setUser }: any) {
     setModalUser({ ...modalUser, [field]: e.target.value });
   };
 
-  const handleLogin = () => {
-    login(modalUser, setUser, closeModal);
-  };
+  const handleLogin = () => {};
 
   const handleRegister = () => {
-    register(modalUser, setIsRegistering);
+    register(modalUser);
   };
 
   const handleSubmit = (e: any) => {
-    e.preventDefault(); 
+    e.preventDefault();
 
     if (isRegistering) {
       handleRegister();
@@ -50,7 +47,10 @@ export default function Modal({ setUser }: any) {
       </button>
 
       {isOpen && (
-        <form className="fixed inset-0 flex items-center justify-center z-50" onSubmit={handleSubmit}>
+        <form
+          className="fixed inset-0 flex items-center justify-center z-50"
+          onSubmit={handleSubmit}
+        >
           {isRegistering ? (
             <div className="bg-white p-4 rounded shadow">
               <label htmlFor="username" className="block font-semibold">

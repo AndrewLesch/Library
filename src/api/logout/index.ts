@@ -15,9 +15,9 @@ const logout = (token: any, setUser: any) => {
       if (data.successMessage) {
         removeToken();
         setUser(emptyUser);
-        alert(data.successMessage)
+        alert(data.successMessage);
       } else {
-        alert(data.errorMessage)
+        alert(data.errorMessage);
       }
     })
     .catch((error) => {
