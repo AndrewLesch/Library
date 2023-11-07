@@ -16,6 +16,7 @@ const getUser = (token: any, setUser: any) => {
       }
     })
     .then((userData) => {
+      console.log(userData);
       setUser(userData);
     })
     .catch((error) => {
