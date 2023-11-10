@@ -1,9 +1,8 @@
-import emptyUser from '@/constants/emptyUser';
 import removeToken from '@/utils/workWithTokens/removeToken';
 
 import fetchPathLogout from './constants';
 
-const logout = (token: any, setUser: any) => {
+const logout = (token: any) => {
   fetch(fetchPathLogout, {
     method: 'GET',
     headers: {
@@ -14,7 +13,6 @@ const logout = (token: any, setUser: any) => {
     .then((data) => {
       if (data.successMessage) {
         removeToken();
-        setUser(emptyUser);
         alert(data.successMessage);
       } else {
         alert(data.errorMessage);

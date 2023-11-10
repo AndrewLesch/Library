@@ -1,17 +1,18 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import getUser from '@/api/getUser';
 import QuoteSlider from '@/components/Slider';
-import emptyUser from '@/constants/emptyUser';
 import getToken from '@/utils/workWithTokens/getToken';
+
+import { useUser } from './userContext';
 
 import '@/app/globals.css';
 
 export default function Home() {
-  const [user, setUser] = useState(emptyUser);
+  const { user, setUser } = useUser();
   const router = useRouter();
 
   useEffect(() => {
@@ -37,10 +38,10 @@ export default function Home() {
   ];
 
   return (
-    <main className="container mx-auto flex justify-around items-center pt-40">
+    <main className="container-fluid mx-auto bg-body-secondary flex justify-around items-center pt-40">
       {user ? (
-        <div className="container w-2/5 text-center==============">
-          <h2 className="text-7xl">Love read books?</h2>
+        <div className="container w-2/5 text-center">
+          <h2 className="text-7xl text-white">Love read books?</h2>
           <h3 className="text-xl mt-5 pb-32">
             Lets add a few books and create some reviews! Enjoy!
           </h3>

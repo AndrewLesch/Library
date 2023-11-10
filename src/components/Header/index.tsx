@@ -1,74 +1,88 @@
 'use client';
-import React, { useEffect, useState } from 'react';
-import {
-  faAdjust,
-  faBook,
-  faLanguage,
-  faUser,
-} from '@fortawesome/free-solid-svg-icons';
+import React, { useState } from 'react';
+import Dropdown from 'react-bootstrap/Dropdown';
+import { faBook, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
-
-import getUser from '@/api/getUser';
+import { useRouter } from 'next/navigation';
 import logout from '@/api/logout';
-import emptyUser from '@/constants/emptyUser';
 import getToken from '@/utils/workWithTokens/getToken';
-
-import Modal from '../Modal';
-
 import '@/app/globals.css';
 
 export default function Header() {
-  const [user, setUser] = useState(emptyUser);
-
-  useEffect(() => {
-    const token = getToken();
-    console.log(token);
-    if (token) {
-      getUser(token, setUser);
-    }
-  }, []);
+  const router = useRouter();
+  const [selectedTheme, setSelectedTheme] = useState('Светлая');
+  const [selectedLanguage, setSelectedLanguage] = useState('Русский');
 
   const handleLogout = () => {
     const token = getToken();
     if (token) {
-      logout(token, setUser);
+      logout(token);
+      router.push('/login');
     }
   };
 
   return (
-    <header
-      className="container mx-auto justify-between flex
-      items-center px-6 py-15 h-32 bg-yellow-100 rounded-lg"
-    >
-      <div className="w-1/4 flex items-center">
-        <Link href="/" className="mx-auto">
-          <FontAwesomeIcon icon={faBook} className="text-sm w-20 h-20" />
-        </Link>
-      </div>
-      <div className="flex items-center justify-center gap-2 md:gap-8 w-1/4">
-        <Link className="text-xl" href="/readable">
-          Readable
-        </Link>
-        <Link className="text-xl" href="/read">
-          Read
-        </Link>
-        <Link className="text-xl" href="/awaiting">
-          Waiting
-        </Link>
-      </div>
-      <div className="flex items-center justify-center gap-2 md:gap-8 w-1/4">
-        {user.username ? (
-          <>
-            <FontAwesomeIcon icon={faUser} className="text-sm w-8 h-8" />
-            {user.username}
-            <button onClick={handleLogout}>Log out</button>
-          </>
-        ) : (
-          <Modal setUser={setUser} />
-        )}
-        <FontAwesomeIcon icon={faAdjust} className="text-sm w-8 h-8" />
-        <FontAwesomeIcon icon={faLanguage} className="text-sm w-12 h-12" />
+    <header className="bg-light py-3">
+      <div className="container-fluid ">
+        <div className="d-flex justify-content-between">
+          <div>
+            <Link href="/" className="d-none d-md-block d-sm-block">
+              <FontAwesomeIcon icon={faBook} style={{ fontSize: '55px' }} />
+            </Link>
+          </div>
+          <div className="d-flex align-items-center ml-auto">
+            <div className="mt-1 mx-2">
+              <FontAwesomeIcon icon={faUser} style={{ fontSize: '38px' }} />
+            </div>
+            <button
+              onClick={handleLogout}
+              className="btn btn-primary mx-2"
+            >
+              Выход
+            </button>
+            <div className="mx-2">
+              <Dropdown>
+                <Dropdown.Toggle
+                  variant="primary"
+                  id="theme-dropdown"
+                  className="btn"
+                  style={{minWidth: 100}}
+                >
+                  {selectedTheme}
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item onClick={() => setSelectedTheme('Светлая')}>
+                    Светлая
+                  </Dropdown.Item>
+                  <Dropdown.Item onClick={() => setSelectedTheme('Темная')}>
+                    Темная
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </div>
+            <div className="mx-2">
+              <Dropdown>
+                <Dropdown.Toggle
+                  variant="primary"
+                  id="language-dropdown"
+                  className="btn"
+                  style={{minWidth: 100}}
+                >
+                  {selectedLanguage}
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item onClick={() => setSelectedLanguage('Русский')}>
+                    Русский
+                  </Dropdown.Item>
+                  <Dropdown.Item onClick={() => setSelectedLanguage('English')}>
+                    English
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </div>
+          </div>
+        </div>
       </div>
     </header>
   );
