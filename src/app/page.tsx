@@ -1,17 +1,16 @@
 'use client';
 import React, { useEffect, useState } from 'react';
+import Dropdown from 'react-bootstrap/Dropdown';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-import Dropdown from 'react-bootstrap/Dropdown';
-
+import getBooks from '@/api/getBooks';
 import getUser from '@/api/getUser';
 import getToken from '@/utils/workWithTokens/getToken';
 
 import { useUser } from './userContext';
 
 import '@/app/globals.css';
-import getBooks from '@/api/getBooks';
 
 const pageSizeOptions = [12, 18, 24];
 const sortOptions = ['Прочитанные', 'Читаемые', 'Ожидающие'];
@@ -50,7 +49,7 @@ export default function Home() {
   };
 
   return (
-    <main className="container-fluid mx-auto bg-body-secondary flex flex-col items-center pt-8">
+    <main className="container-fluid mx-auto bg-body-secondary flex flex-col items-center pt-8 min-vh-100">
       <div className="container-fluid w-75 d-flex flex-wrap align-items-center pt-2">
         {/* Селектор количества книг на странице */}
         <div className="d-flex justify-content-center col m-2">
@@ -167,9 +166,8 @@ export default function Home() {
     }
   `}</style>
         {getBooksOnCurrentPage()?.map((book: any, index: any) => (
-          <Link href="/book-form" className="btn">
+          <Link key={index} href="/book-form" className="btn">
             <div
-              key={index}
               className="card text-dark bg-light mb-4 col-12 shadow-hover"
               style={{ width: '320px', height: '470px' }}
             >
