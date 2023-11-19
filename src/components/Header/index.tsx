@@ -5,8 +5,10 @@ import { faBook, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+
 import logout from '@/api/logout';
 import getToken from '@/utils/workWithTokens/getToken';
+
 import '@/app/globals.css';
 
 export default function Header() {
@@ -25,29 +27,29 @@ export default function Header() {
   return (
     <header className="bg-light py-3">
       <div className="container-fluid ">
-        <div className="d-flex justify-content-between">
-          <div>
-            <Link href="/" className="d-none d-md-block d-sm-block">
-              <FontAwesomeIcon icon={faBook} style={{ fontSize: '55px' }} />
+        <div className="d-flex justify-content-md-between justify-content-center">
+          <div className="d-none d-md-block d-sm-block mx-4 mt-1">
+            <Link href="/">
+              <FontAwesomeIcon icon={faBook} style={{ fontSize: '40px' }} />
             </Link>
           </div>
-          <div className="d-flex align-items-center ml-auto">
-            <div className="mt-1 mx-2">
+          <div className="d-flex align-items-center flex-wrap justify-content-between">
+            <div className="mt-1 mx-2 mb-2">
               <FontAwesomeIcon icon={faUser} style={{ fontSize: '38px' }} />
             </div>
             <button
               onClick={handleLogout}
-              className="btn btn-primary mx-2"
+              className="btn btn-primary mx-2 mb-2"
             >
               Выход
             </button>
-            <div className="mx-2">
+            <div className="mx-2 mb-2">
               <Dropdown>
                 <Dropdown.Toggle
                   variant="primary"
                   id="theme-dropdown"
                   className="btn"
-                  style={{minWidth: 100}}
+                  style={{ minWidth: 100 }}
                 >
                   {selectedTheme}
                 </Dropdown.Toggle>
@@ -61,13 +63,13 @@ export default function Header() {
                 </Dropdown.Menu>
               </Dropdown>
             </div>
-            <div className="mx-2">
+            <div className="mx-2 mb-2 mx-auto">
               <Dropdown>
                 <Dropdown.Toggle
                   variant="primary"
                   id="language-dropdown"
                   className="btn"
-                  style={{minWidth: 100}}
+                  style={{ minWidth: 100 }}
                 >
                   {selectedLanguage}
                 </Dropdown.Toggle>
