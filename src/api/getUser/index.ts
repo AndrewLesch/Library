@@ -1,27 +1,28 @@
 import fetchPathGetUser from './constants';
 
-const getUser = (token: any, setUser: any) => {
+const getUser = async (token: any) => {
   console.log(token);
-  fetch(fetchPathGetUser, {
-    method: 'GET',
-    headers: {
-      Authorization: token,
-    },
-  })
-    .then((response) => {
-      if (response.status === 200) {
-        return response.json();
-      } else {
-        throw new Error('Failed to fetch user data');
-      }
-    })
-    .then((userData) => {
-      console.log(userData);
-      setUser(userData);
-    })
-    .catch((error) => {
-      console.error(error);
+
+  try {
+    const response = await fetch(fetchPathGetUser, {
+      method: 'GET',
+      headers: {
+        Authorization: token,
+      },
     });
+
+    const data = await response.json();
+
+    if (data) {
+      return data;
+    } else {
+      throw new Error(
+        `Failed to fetch user data. Server responded with ${response.status}`,
+      );
+    }
+  } catch (error: any) {
+    console.error('Error fetching user data:', error.message);
+  }
 };
 
 export default getUser;

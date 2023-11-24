@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import getBooksByType from '@/api/getBooks';
+import getBooks from '@/api/getBooks';
 import getToken from '@/utils/workWithTokens/getToken';
 
 export default function BookTypePage() {
@@ -15,7 +15,7 @@ export default function BookTypePage() {
     const token = getToken();
 
     // Выполняем запрос при монтировании компонента
-    getBooksByType(token, bookType, setBooks);
+    getBooks(token, bookType, setBooks);
   }, [bookType]);
 
   // Разделяем книги на страницы

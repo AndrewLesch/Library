@@ -1,69 +1,100 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import Dropdown from 'react-bootstrap/Dropdown';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 
-import getUser from '@/api/getUser';
-import QuoteSlider from '@/components/Slider';
-import emptyUser from '@/constants/emptyUser';
-import getToken from '@/utils/workWithTokens/getToken';
+import BookList from '@/components/BookList';
+import Loader from '@/components/Loader';
+import Pagination from '@/components/Pagination';
+import { pageSizeOptions } from '@/constants/pageSize';
+import { sortOptions } from '@/constants/sortOptions';
 
-import '@/app/globals.css';
+import { useBookData } from '../hooks/useBookData';
+
+import './globals.css';
 
 export default function Home() {
-  const [user, setUser] = useState(emptyUser);
-  const router = useRouter();
-
-  useEffect(() => {
-    const token = getToken();
-    console.log(token);
-    if (token) {
-      getUser(token, setUser);
-    } else {
-      router.push('/login');
-    }
-  }, []);
-
-  const quotes = [
-    {
-      text: 'Read books. Add some books which you read in past time',
-    },
-    {
-      text: 'Readable books. Add some books which you read in current time',
-    },
-    {
-      text: 'Awaiting books. Add some books which you want to read in feature',
-    },
-  ];
+  const {
+    currentPage,
+    selectedSort,
+    pageSize,
+    filteredBooks,
+    loading,
+    setPageSize,
+    setCurrentPage,
+    setSelectedSort,
+  } = useBookData();
 
   return (
-    <main className="container mx-auto flex justify-around items-center pt-40">
-      {user ? (
-        <div className="container w-2/5 text-center==============">
-          <h2 className="text-7xl">Love read books?</h2>
-          <h3 className="text-xl mt-5 pb-32">
-            Lets add a few books and create some reviews! Enjoy!
-          </h3>
-          <QuoteSlider quotes={quotes} />
-          <button
-            className="bg-blue-500 hover:bg-blue-600 text-white
-            font-bold py-2 px-4 rounded-full shadow-lg"
-          >
-            <Link href="/book-form">Add book</Link>
-          </button>
+    <main
+      className="container-fluid mx-auto bg-body-secondary
+      flex flex-col items-center pt-8 min-vh-100"
+    >
+      <div className="container-fluid w-75 d-flex flex-wrap align-items-center pt-2">
+        <div className="d-flex justify-content-center col m-2">
+          <p className="my-auto h6">Количество книг</p>
+          <Dropdown className="p-2">
+            <Dropdown.Toggle
+              variant="secondary"
+              id="pageSize-dropdown"
+              className="btn"
+            >
+              {pageSize}
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              {pageSizeOptions.map((option) => (
+                <Dropdown.Item key={option} onClick={() => setPageSize(option)}>
+                  {option}
+                </Dropdown.Item>
+              ))}
+            </Dropdown.Menu>
+          </Dropdown>
         </div>
+
+        <div className="col m-2 text-center">
+          <Dropdown className="p-2">
+            <Dropdown.Toggle
+              variant="secondary"
+              id="sort-dropdown"
+              className="btn"
+              style={{ minWidth: 150 }}
+            >
+              {selectedSort}
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              {sortOptions.map((option) => (
+                <Dropdown.Item
+                  key={option}
+                  onClick={() => setSelectedSort(option)}
+                >
+                  {option}
+                </Dropdown.Item>
+              ))}
+            </Dropdown.Menu>
+          </Dropdown>
+        </div>
+
+        <Pagination
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          filteredBooks={filteredBooks}
+          pageSize={pageSize}
+        />
+
+        <Link href="/book-form" className="col m-2 text-center">
+          <button className="btn btn-success">Добавить книгу</button>
+        </Link>
+      </div>
+
+      {loading ? (
+        <Loader></Loader>
       ) : (
-        <div className="container w-2/5 text-center">
-          <p>Please register to access this content.</p>
-          <button
-            className="bg-blue-500 hover:bg-blue-600
-            text-white font-bold py-2 px-4 rounded-full shadow-lg"
-          >
-            <Link href="login">Register</Link>
-          </button>
-        </div>
+        <BookList
+          filteredBooks={filteredBooks}
+          currentPage={currentPage}
+          pageSize={pageSize}
+        ></BookList>
       )}
-      <div className="container w-2/5 text-center">IMG</div>
     </main>
   );
 }
