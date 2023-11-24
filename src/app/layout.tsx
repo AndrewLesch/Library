@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 
-import { UserProvider } from './userContext';
+import { UserProvider } from '../contexts/userContext';
 
 export const metadata = {
   title: 'Books',
