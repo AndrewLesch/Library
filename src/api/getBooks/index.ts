@@ -1,28 +1,25 @@
 import fetchPathGetBooksByType from './constants';
 
-const getBooksByType = (token: any, bookType: any, setBooks: any): any => {
-  fetch(fetchPathGetBooksByType, {
-    method: 'GET',
-    headers: {
-      Authorization: token,
-      'Book-Type': bookType,
-    },
-  })
-    .then((response) => {
-      console.log(response);
-      if (response.status === 200) {
-        return response.json();
-      } else {
-        throw new Error('Failed to fetch books by type');
-      }
-    })
-    .then((responseData) => {
-      console.log(responseData);
-      setBooks(responseData);
-    })
-    .catch((error) => {
-      console.error(error);
+const getBooks = async (token: any): Promise<any> => {
+  try {
+    const response = await fetch(fetchPathGetBooksByType, {
+      method: 'GET',
+      headers: {
+        Authorization: token,
+      },
     });
+
+    const responseData = await response.json();
+    if (responseData) {
+      console.log(responseData);
+      return responseData;
+    } else {
+      throw new Error('Failed to fetch books by type');
+    }
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 };
 
-export default getBooksByType;
+export default getBooks;

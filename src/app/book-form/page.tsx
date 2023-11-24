@@ -40,7 +40,7 @@ export default function BookForm() {
   };
 
   return (
-    <form className="container mx-auto mt-4">
+    <form className="container mx-auto mt-4 min-vh-100">
       <h2 className="text-2xl font-bold mb-4">Add book</h2>
       <input
         className="w-full p-2 mb-2 border border-gray-300 rounded"
