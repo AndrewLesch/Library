@@ -81,7 +81,7 @@ export default function Home() {
           pageSize={pageSize}
         />
 
-        <Link href="/book-form" className="col m-2 text-center">
+        <Link href="/book/new" className="col m-2 text-center">
           <button className="btn btn-success">Добавить книгу</button>
         </Link>
       </div>

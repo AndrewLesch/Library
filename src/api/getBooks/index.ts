@@ -11,7 +11,6 @@ const getBooks = async (token: any): Promise<any> => {
 
     const responseData = await response.json();
     if (responseData) {
-      console.log(responseData);
       return responseData;
     } else {
       throw new Error('Failed to fetch books by type');

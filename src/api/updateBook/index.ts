@@ -1,18 +1,21 @@
-import fetchPathAddBook from './constants';
+import fetchPathUpdateBook from './constant';
 
-const addBook = (token: any, bookData: any) => {
-  console.log(bookData);
+const updateBook = (token: any, bookId: any, bookData: any) => {
   const formData = new FormData();
 
   // Добавляем данные о книге (в формате JSON) в FormData
   formData.append('bookData', JSON.stringify(bookData));
 
   // Добавляем изображение книги как файл в FormData с ключом 'img'
-  formData.append('img', bookData.coverPath);
-  console.log(bookData.coverPath);
 
-  fetch(fetchPathAddBook, {
-    method: 'POST',
+  if (bookData.coverPath) {
+    formData.append('img', bookData.coverPath);
+  }
+  console.log(bookData.coverPath, bookData);
+
+  fetch(`${fetchPathUpdateBook}/${bookId}`, {
+    // здесь предполагается, что у вас есть переменная bookId
+    method: 'PATCH', // или 'PATCH' в зависимости от вашего API
     headers: {
       Authorization: token,
     },
@@ -22,7 +25,7 @@ const addBook = (token: any, bookData: any) => {
       if (response.status === 200) {
         return response.json();
       } else {
-        throw new Error('Failed to add the book');
+        throw new Error('Failed to update the book');
       }
     })
     .then((responseData) => {
@@ -34,4 +37,4 @@ const addBook = (token: any, bookData: any) => {
     });
 };
 
-export default addBook;
+export default updateBook;
