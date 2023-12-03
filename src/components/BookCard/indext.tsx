@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 const BookCard = ({ book }: any) => (
-  <Link href="/book-form" className="btn">
+  <Link href={`/book/${book.id}`} className="btn">
     <div
       className="card text-dark bg-light mb-4 col-12 shadow-hover"
       style={{ width: '320px', height: '470px' }}
