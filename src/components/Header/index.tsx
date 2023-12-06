@@ -37,16 +37,16 @@ export default function Header() {
             <div className="mt-1 mx-2 mb-2">
               <FontAwesomeIcon icon={faUser} style={{ fontSize: '38px' }} />
             </div>
-            <button
-              onClick={handleLogout}
-              className="btn btn-primary mx-2 mb-2"
-            >
+            <button onClick={handleLogout} className="btn btn-dark mx-2 mb-2">
               Выход
             </button>
+            <Link href="/statistics" className="btn btn-primary mx-2 mb-2">
+              Статистика
+            </Link>
             <div className="mx-2 mb-2">
               <Dropdown>
                 <Dropdown.Toggle
-                  variant="primary"
+                  variant="secondary"
                   id="theme-dropdown"
                   className="btn"
                   style={{ minWidth: 100 }}
@@ -66,7 +66,7 @@ export default function Header() {
             <div className="mx-2 mb-2 mx-auto">
               <Dropdown>
                 <Dropdown.Toggle
-                  variant="primary"
+                  variant="secondary"
                   id="language-dropdown"
                   className="btn"
                   style={{ minWidth: 100 }}
