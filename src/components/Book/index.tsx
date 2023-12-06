@@ -14,17 +14,17 @@ import NotificationToast from '../Toast';
 import '@/app/globals.css';
 
 const empyBook = {
-  title: 'Введите имя книги',
-  author: 'Авторчик',
+  title: 'Название',
+  author: 'Автор',
   type: 'read',
-  genre: 'wr',
+  genre: 'Fiction',
   language: 'Russian',
   rating: 0,
   pages: 0,
-  startDate: '23',
-  endDate: '34',
-  review: 'sfsd',
-  awaitingDate: '23',
+  startDate: '',
+  endDate: '',
+  review: '',
+  awaitingDate: '',
   coverPath: '',
 };
 
@@ -212,12 +212,12 @@ export default function Book({ isNewBook, addedBook }: any) {
                     onChange={(e) => handleFieldChange(e, 'genre')}
                     value={book.genre}
                   >
-                    <option value="fiction">Fiction</option>
-                    <option value="non-fiction">Non Fiction</option>
-                    <option value="fantasy">Fantasy</option>
-                    <option value="horror">Horror</option>
-                    <option value="thriller">Thriller</option>
-                    <option value="biography">Biography</option>
+                    <option value="Fiction">Fiction</option>
+                    <option value="Non-fiction">Non Fiction</option>
+                    <option value="Fantasy">Fantasy</option>
+                    <option value="Horror">Horror</option>
+                    <option value="Thriller">Thriller</option>
+                    <option value="Biography">Biography</option>
                   </select>
                 </div>
               )}
