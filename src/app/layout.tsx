@@ -7,11 +7,6 @@ import Header from '@/components/Header';
 
 import { UserProvider } from '../contexts/userContext';
 
-export const metadata = {
-  title: 'Books',
-  description: 'Lets read some books',
-};
-
 export default function RootLayout({
   children,
 }: {
