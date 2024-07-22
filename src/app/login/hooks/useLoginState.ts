@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation';
 
 import login from '@/api/login';
 import register from '@/api/register';
-import emptyUser from '@/constants/emptyUser';
+import { emptyUser } from '@/constants/emptyUser';
 
 export function useLoginState(showToastMessage: any) {
   const [user, setUser] = useState(emptyUser);

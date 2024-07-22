@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useParams } from 'next/navigation';
 
@@ -7,13 +7,17 @@ import addBook from '@/api/addBook';
 import deleteBook from '@/api/deleteBook';
 import updateBook from '@/api/updateBook';
 import { useToast } from '@/app/login/hooks/useToast';
+import { BookType } from '@/types';
 import getToken from '@/utils/workWithTokens/getToken';
 
 import NotificationToast from '../Toast';
 
-import '@/app/globals.css';
+type BookTypeComponent = {
+  isNewBook: boolean;
+  addedBook?: BookType;
+};
 
-const empyBook = {
+const emptyBook: BookType = {
   title: 'Название',
   author: 'Автор',
   type: 'read',
@@ -21,15 +25,15 @@ const empyBook = {
   language: 'Russian',
   rating: 0,
   pages: 0,
-  startDate: '',
-  endDate: '',
+  startDate: new Date(),
+  endDate: new Date(),
   review: '',
-  awaitingDate: '',
+  awaitingDate: new Date(),
   coverPath: '',
 };
 
-export default function Book({ isNewBook, addedBook }: any) {
-  const [book, setBook] = useState(empyBook || addedBook);
+const Book: FC<BookTypeComponent> = ({ isNewBook, addedBook }) => {
+  const [book, setBook] = useState(emptyBook || addedBook);
   const [image, setImage] = useState<any>(null);
 
   const [isBookDeleted, setIsBookDeleted] = useState(false);
@@ -63,7 +67,7 @@ export default function Book({ isNewBook, addedBook }: any) {
     const token = getToken();
     addBook(token, book);
 
-    setBook(empyBook);
+    setBook(emptyBook);
     setImage([]);
     showToastMessage('Книга успешно добавлена', false);
   };
@@ -110,11 +114,7 @@ export default function Book({ isNewBook, addedBook }: any) {
             <div className="row">
               <div className="col-10 col-md-10 col-lg-10 mx-auto m-2">
                 <img
-                  src={
-                    isEditMode
-                      ? image || `http://localhost:3001/${book.coverPath}`
-                      : `http://localhost:3001/${book.coverPath}`
-                  }
+                  src={isEditMode ? image || book.coverPath : book.coverPath}
                   className="img-fluid rounded"
                   alt="Выберите обложку для книги"
                   style={{
@@ -294,7 +294,7 @@ export default function Book({ isNewBook, addedBook }: any) {
                       <input
                         required
                         type="date"
-                        value={book.awaitingDate}
+                        value={book.awaitingDate.toDateString()}
                         className="form-control"
                         onChange={(e) => handleFieldChange(e, 'awaitingDate')}
                       ></input>
@@ -306,7 +306,7 @@ export default function Book({ isNewBook, addedBook }: any) {
                       <input
                         required
                         type="date"
-                        value={book.startDate}
+                        value={book.startDate.toDateString()}
                         className="form-control"
                         onChange={(e) => handleFieldChange(e, 'startDate')}
                       ></input>
@@ -369,4 +369,6 @@ export default function Book({ isNewBook, addedBook }: any) {
       )}
     </div>
   );
-}
+};
+
+export default Book;

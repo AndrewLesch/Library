@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {
   Cell,
   Legend,
@@ -9,8 +9,14 @@ import {
 } from 'recharts';
 
 import { pieColors } from '@/app/statistics/constants';
+import { PieDataType } from '@/types';
 
-const GenreStatistics = ({ pieData, loading }: any) => (
+type GenreStatisticsType = {
+  pieData: PieDataType;
+  loading: boolean;
+};
+
+const GenreStatistics: FC<GenreStatisticsType> = ({ pieData, loading }) => (
   <div className="d-block w-50 card m-2">
     <div className="card-header text-center">Статистика книг по жанрам</div>
     <div className="card-body">
@@ -31,7 +37,7 @@ const GenreStatistics = ({ pieData, loading }: any) => (
               animationBegin={500}
               animationDuration={2000}
             >
-              {pieData.map((_: any, index: any) => (
+              {pieData.map((_, index: number) => (
                 <Cell
                   key={`cell-${index}`}
                   fill={pieColors[index % pieColors.length]}

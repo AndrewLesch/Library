@@ -1,1 +1,1 @@
-export const pageSizeOptions = [12, 18, 24];
+export const pageSizeOptions: number[] = [12, 18, 24];

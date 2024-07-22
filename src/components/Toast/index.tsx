@@ -1,12 +1,19 @@
-import React from 'react';
+import React, { FC } from 'react';
 import Toast from 'react-bootstrap/Toast';
 
-export default function NotificationToast({
+type NotificationToastType = {
+  showToast: boolean;
+  toastIsError: boolean;
+  toastMessage: string;
+  onClose: () => void;
+};
+
+const NotificationToast: FC<NotificationToastType> = ({
   showToast,
-  onClose,
   toastIsError,
   toastMessage,
-}: any) {
+  onClose,
+}) => {
   return (
     <Toast
       show={showToast}
@@ -25,4 +32,6 @@ export default function NotificationToast({
       <Toast.Body className={'text-light'}>{toastMessage}</Toast.Body>
     </Toast>
   );
-}
+};
+
+export default NotificationToast;

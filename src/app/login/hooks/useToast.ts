@@ -5,7 +5,7 @@ export function useToast() {
   const [toastMessage, setToastMessage] = useState('');
   const [toastIsError, setToastIsError] = useState(false);
 
-  const showToastMessage = (message: any, isError: any) => {
+  const showToastMessage = (message: string, isError: boolean) => {
     setToastMessage(message);
     setToastIsError(isError);
     setShowToast(true);

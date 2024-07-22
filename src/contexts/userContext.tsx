@@ -1,10 +1,25 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, {
+  createContext,
+  FC,
+  ReactNode,
+  useContext,
+  useState,
+} from 'react';
 
-import emptyUser from '@/constants/emptyUser';
+import { emptyUser, userType } from '@/constants/emptyUser';
 
-const initialUserContext = {
+type initalUserContextType = {
+  user: userType;
+  setUser: (user: userType) => void;
+};
+
+type UserProviderProps = {
+  children: ReactNode;
+};
+
+const initialUserContext: initalUserContextType = {
   user: emptyUser,
-  setUser: (user: any) => {
+  setUser: (user: userType) => {
     user;
   },
 };
@@ -15,8 +30,8 @@ export const useUser = () => {
   return useContext(UserContext);
 };
 
-export const UserProvider = ({ children }: any) => {
-  const [user, setUser] = useState(emptyUser);
+export const UserProvider: FC<UserProviderProps> = ({ children }) => {
+  const [user, setUser] = useState<userType>(emptyUser);
 
   return (
     <UserContext.Provider value={{ user, setUser }}>

@@ -1,7 +1,21 @@
+import React, { FC } from 'react';
+
+import { BooksType } from '@/types';
+
 import BookCard from '../BookCard/indext';
 import EmptyLibraryMessage from '../EmptyLibraryMessage';
 
-const BookList = ({ filteredBooks, currentPage, pageSize }: any) => (
+type BooksListType = {
+  filteredBooks: BooksType[];
+  currentPage: number;
+  pageSize: number;
+};
+
+const BookList: FC<BooksListType> = ({
+  filteredBooks,
+  currentPage,
+  pageSize,
+}) => (
   <div className="container-fluid w-75 d-flex flex-wrap justify-content-around mt-4">
     <style>{`
       .card {
@@ -20,7 +34,7 @@ const BookList = ({ filteredBooks, currentPage, pageSize }: any) => (
     {filteredBooks.length > 0 ? (
       filteredBooks
         .slice((currentPage - 1) * pageSize, currentPage * pageSize)
-        .map((book: any, index: any) => <BookCard key={index} book={book} />)
+        .map((book: any, index: number) => <BookCard key={index} book={book} />)
     ) : (
       <EmptyLibraryMessage />
     )}

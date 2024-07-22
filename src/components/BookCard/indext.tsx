@@ -1,5 +1,7 @@
 import Link from 'next/link';
 
+// пофиксить баг с book: any
+
 const BookCard = ({ book }: any) => (
   <Link href={`/book/${book.id}`} className="btn">
     <div
@@ -8,7 +10,7 @@ const BookCard = ({ book }: any) => (
     >
       <h5 className="card-title text-truncate m-2 text-center">{book.title}</h5>
       <img
-        src={'http://localhost:3001/' + book.coverPath}
+        src={book.coverPath}
         className="card-img-top img-fluid h-75 w-75 mx-auto"
         alt={book.title}
         style={{ objectFit: 'cover' }}

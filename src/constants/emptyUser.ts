@@ -1,13 +1,11 @@
-type emptyUserType = {
+export type userType = {
   username: string;
   password: string;
   email: string;
 };
 
-const emptyUser: emptyUserType = {
+export const emptyUser: userType = {
   username: '',
   password: '',
   email: '',
 };
-
-export default emptyUser;

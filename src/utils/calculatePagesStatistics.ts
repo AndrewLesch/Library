@@ -1,14 +1,16 @@
-const calculatePagesStatistics = (books: any) => {
+import { BooksType, BookType } from '@/types';
+
+const calculatePagesStatistics = (books: BooksType) => {
   const totalBookPages = books.reduce(
-    (sum: number, book: any) => sum + book.pages,
+    (sum: number, book: BookType) => sum + book.pages,
     0,
   );
   const shortestBookPages = books.reduce(
-    (min: any, book: any) => (book.pages < min.pages ? book : min),
+    (min: BookType, book: BookType) => (book.pages < min.pages ? book : min),
     books[0],
   );
   const longestBookPages = books.reduce(
-    (max: any, book: any) => (book.pages > max.pages ? book : max),
+    (max: BookType, book: BookType) => (book.pages > max.pages ? book : max),
     books[0],
   );
 

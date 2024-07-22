@@ -1,1 +1,1 @@
-export const sortOptions = ['Read', 'Readable', 'Awaiting'];
+export const sortOptions: string[] = ['Read', 'Readable', 'Awaiting'];

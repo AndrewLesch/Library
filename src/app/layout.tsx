@@ -1,10 +1,5 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
-
-import Footer from '@/components/Footer';
-import Header from '@/components/Header';
-
 import { UserProvider } from '../contexts/userContext';
 
 export default function RootLayout({
@@ -12,15 +7,10 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const pathname = usePathname();
   return (
     <html lang="en">
       <body>
-        <UserProvider>
-          {pathname !== '/login' && <Header></Header>}
-          {children}
-          {pathname !== '/login' && <Footer></Footer>}
-        </UserProvider>
+        <UserProvider>{children}</UserProvider>
       </body>
     </html>
   );

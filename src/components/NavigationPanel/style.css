@@ -1,0 +1,62 @@
+.navigation-panel-container {
+  width: 250px;
+  background-color: #f7aef8;
+}
+
+.category-panel-icon {
+  font-size: 90px;
+  margin-left: 80px;
+  margin-top: 85px;
+}
+
+.icon-description {
+  margin-top: 30px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.links-container {
+  text-align: center;
+  margin-top: 60px;
+}
+
+.category-link-icon {
+  font-size: 30px;
+  width: 40px;
+}
+
+.link-container {
+  width: 160px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  margin-bottom: 35px;
+  cursor: pointer;
+}
+
+.link-container:hover {
+  text-decoration: underline;
+}
+
+.link-text {
+  margin-left: 20px;
+  width: 100px;
+  text-align: start;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.exit-button-container {
+  width: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: 0;
+  position: absolute;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.exit-button-container:hover {
+  text-decoration: underline;
+}

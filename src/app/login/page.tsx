@@ -8,8 +8,6 @@ import NotificationToast from '@/components/Toast';
 import { useLoginState } from './hooks/useLoginState';
 import { useToast } from './hooks/useToast';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-
 export default function Login() {
   const { showToast, showToastMessage, hideToast, toastMessage, toastIsError } =
     useToast();
@@ -41,7 +39,10 @@ export default function Login() {
                 <div className="spinner-border" role="status" />
               </div>
             ) : isRegistering ? (
-              <RegisterForm user={user} onUserChange={handleUserDataChange} />
+              <RegisterForm
+                user={user}
+                onUserDataChange={handleUserDataChange}
+              />
             ) : (
               <LoginForm user={user} onUserChange={handleUserDataChange} />
             )}

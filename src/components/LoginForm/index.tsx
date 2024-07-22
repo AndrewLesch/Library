@@ -1,6 +1,13 @@
-import React from 'react';
+import React, { ChangeEvent, FC } from 'react';
 
-const LoginForm = ({ user, onUserChange }: any) => {
+import { userType } from '@/constants/emptyUser';
+
+type LoginFormType = {
+  user: userType;
+  onUserChange: (event: ChangeEvent<HTMLInputElement>, field: string) => void;
+};
+
+const LoginForm: FC<LoginFormType> = ({ user, onUserChange }) => {
   return (
     <div>
       <div className="mb-3 row justify-content-between">

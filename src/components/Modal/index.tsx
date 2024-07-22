@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 
 import register from '@/api/register';
-import emptyUser from '@/constants/emptyUser';
+import { emptyUser } from '@/constants/emptyUser';
 
 export default function Modal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,7 +17,10 @@ export default function Modal() {
     setIsOpen(false);
   };
 
-  const handleUserDataChange = (e: any, field: string) => {
+  const handleUserDataChange = (
+    e: ChangeEvent<HTMLInputElement>,
+    field: string,
+  ) => {
     setModalUser({ ...modalUser, [field]: e.target.value });
   };
 
@@ -27,7 +30,7 @@ export default function Modal() {
     register(modalUser);
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (isRegistering) {

@@ -1,6 +1,6 @@
 import fetchPathDeleteBook from './constant';
 
-const deleteBook = (token: any, bookId: any) => {
+const deleteBook = (token: any, bookId: string | string[]) => {
   fetch(`${fetchPathDeleteBook}/${bookId}`, {
     method: 'DELETE',
     headers: {

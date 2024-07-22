@@ -10,11 +10,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 export default function Footer() {
   const technologies = [
     'Next.js',
-    'Bootstrap',
     'Node.js',
     'MySql',
     'TypeScript',
     'GitHub',
+    'Что-то еще',
   ];
   return (
     <footer className="container-fluid mx-auto bg-light text-center pb-2">

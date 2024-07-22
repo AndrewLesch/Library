@@ -1,6 +1,14 @@
-import React from 'react';
+import React, { FC } from 'react';
 
-const TotalPagesStatistics = ({ totalBookPages, loading }: any) => {
+type TotalPageStatisticsType = {
+  totalBookPages: number;
+  loading: boolean;
+};
+
+const TotalPagesStatistics: FC<TotalPageStatisticsType> = ({
+  totalBookPages,
+  loading,
+}) => {
   return (
     <div className="w-50 text-center card m-2">
       <div className="card-header text-center">Всего прочитано страниц:</div>

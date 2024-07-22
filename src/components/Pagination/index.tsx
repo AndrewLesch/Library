@@ -1,17 +1,22 @@
-import React from 'react';
+import React, { FC } from 'react';
 
-const Pagination = ({
+type PaginationType = {
+  currentPage: number;
+  filteredBooksLength: number;
+  pageSize: number;
+  setCurrentPage: (page: number | ((prev: number) => number)) => void;
+};
+
+const Pagination: FC<PaginationType> = ({
   currentPage,
-  setCurrentPage,
-  filteredBooks,
+  filteredBooksLength,
   pageSize,
-}: any) => {
+  setCurrentPage,
+}) => {
   return (
     <div className="col d-flex justify-content-center m-2">
       <button
-        onClick={() =>
-          setCurrentPage((prev: any) => (prev > 1 ? prev - 1 : prev))
-        }
+        onClick={() => setCurrentPage((prev) => (prev > 1 ? prev - 1 : prev))}
         className="mx-1 px-3 py-1 border rounded bg-light"
         disabled={currentPage === 1}
       >
@@ -19,7 +24,7 @@ const Pagination = ({
       </button>
 
       {Array.from({
-        length: Math.ceil(filteredBooks?.length / pageSize),
+        length: Math.ceil(filteredBooksLength / pageSize),
       }).map((_, index) => {
         const page = index + 1;
         const isPageInRange = page >= currentPage && page <= currentPage;
@@ -42,14 +47,12 @@ const Pagination = ({
 
       <button
         onClick={() =>
-          setCurrentPage((prev: any) =>
-            prev < Math.ceil(filteredBooks?.length / pageSize)
-              ? prev + 1
-              : prev,
+          setCurrentPage((prev) =>
+            prev < Math.ceil(filteredBooksLength / pageSize) ? prev + 1 : prev,
           )
         }
         className="mx-1 px-3 py-1 border rounded bg-light"
-        disabled={currentPage === Math.ceil(filteredBooks.length / pageSize)}
+        disabled={currentPage === Math.ceil(filteredBooksLength / pageSize)}
       >
         {'>'}
       </button>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {
   Brush,
   CartesianGrid,
@@ -11,7 +11,14 @@ import {
   YAxis,
 } from 'recharts';
 
-const BooksStatistics = ({ allBooks, loading }: any) => (
+import { BooksType } from '@/types';
+
+type BooksStatisticsType = {
+  allBooks: BooksType[];
+  loading: boolean;
+};
+
+const BooksStatistics: FC<BooksStatisticsType> = ({ allBooks, loading }) => (
   <div className="d-block w-100 card m-2">
     <div className="card-header text-center">
       Статистика книг по оценкам и количеству страниц

@@ -9,7 +9,6 @@ const addBook = (token: any, bookData: any) => {
 
   // Добавляем изображение книги как файл в FormData с ключом 'img'
   formData.append('img', bookData.coverPath);
-  console.log(bookData.coverPath);
 
   fetch(fetchPathAddBook, {
     method: 'POST',

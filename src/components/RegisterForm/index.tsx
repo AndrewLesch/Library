@@ -1,6 +1,16 @@
-import React from 'react';
+import React, { ChangeEvent, FC } from 'react';
 
-const RegisterForm = ({ user, onUserChange }: any) => {
+import { userType } from '@/constants/emptyUser';
+
+type RegisterFormType = {
+  user: userType;
+  onUserDataChange: (
+    event: ChangeEvent<HTMLInputElement>,
+    field: string,
+  ) => void;
+};
+
+const RegisterForm: FC<RegisterFormType> = ({ user, onUserDataChange }) => {
   return (
     <div>
       <div className="mb-3 row justify-content-between">
@@ -9,7 +19,7 @@ const RegisterForm = ({ user, onUserChange }: any) => {
         </label>
         <div className="col-12 col-md-8">
           <input
-            onChange={(e) => onUserChange(e, 'username')}
+            onChange={(e) => onUserDataChange(e, 'username')}
             value={user.username}
             type="text"
             className="form-control"
@@ -25,7 +35,7 @@ const RegisterForm = ({ user, onUserChange }: any) => {
         <div className="col-12 col-md-8">
           <input
             value={user.password}
-            onChange={(e) => onUserChange(e, 'password')}
+            onChange={(e) => onUserDataChange(e, 'password')}
             type="password"
             className="form-control"
             id="password"
@@ -40,7 +50,7 @@ const RegisterForm = ({ user, onUserChange }: any) => {
         <div className="col-12 col-md-8">
           <input
             value={user.email}
-            onChange={(e) => onUserChange(e, 'email')}
+            onChange={(e) => onUserDataChange(e, 'email')}
             type="email"
             className="form-control"
             id="email"

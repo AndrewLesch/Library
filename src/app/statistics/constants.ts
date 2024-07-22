@@ -1,4 +1,4 @@
-const pieColors = [
+const pieColors: string[] = [
   '#5d54fa',
   '#26ce6f',
   '#ffc658',
@@ -7,5 +7,5 @@ const pieColors = [
   '#551f88',
 ];
 
-const filteredType = 'read';
+const filteredType: string = 'read';
 export { pieColors, filteredType };

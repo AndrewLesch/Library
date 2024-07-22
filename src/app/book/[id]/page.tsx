@@ -4,6 +4,7 @@ import { useParams } from 'next/navigation';
 
 import getBookById from '@/api/getBookById';
 import Book from '@/components/Book';
+import { BookType } from '@/types';
 import getToken from '@/utils/workWithTokens/getToken';
 
 const ViewBook = () => {
@@ -18,7 +19,7 @@ const ViewBook = () => {
 
   return (
     <div className="bg-body-secondary">
-      <Book isNewBook={false} addedBook={loadedBook}></Book>
+      <Book isNewBook={false} addedBook={loadedBook as BookType}></Book>
     </div>
   );
 };

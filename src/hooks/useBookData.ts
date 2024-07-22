@@ -5,6 +5,7 @@ import getBooks from '@/api/getBooks';
 import getUser from '@/api/getUser';
 import { pageSizeOptions } from '@/constants/pageSize';
 import { sortOptions } from '@/constants/sortOptions';
+import { BookType } from '@/types';
 import getToken from '@/utils/workWithTokens/getToken';
 
 import { useUser } from '../contexts/userContext';
@@ -13,12 +14,14 @@ export function useBookData() {
   const { setUser } = useUser();
   const [books, setBooks] = useState([]);
   const [filteredBooks, setFilteredBooks] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const router = useRouter();
   const [pageSize, setPageSize] = useState(pageSizeOptions[0]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [selectedSort, setSelectedSort] = useState(sortOptions[0]);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [selectedBooksFilter, setSelectedBooksFilter] = useState<string>(
+    sortOptions[0],
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,6 +31,7 @@ export function useBookData() {
           setLoading(true);
           setUser(await getUser(token));
           const booksData = await getBooks(token);
+          console.log(booksData);
           setBooks(booksData);
           setLoading(false);
         } else {
@@ -49,14 +53,20 @@ export function useBookData() {
   useEffect(() => {
     setFilteredBooks(
       books.filter(
-        (book: any) => book.type == selectedSort.toLocaleLowerCase(),
+        (book: BookType) =>
+          book.type == selectedBooksFilter.toLocaleLowerCase(),
       ),
     );
-  }, [selectedSort, books]);
+  }, [selectedBooksFilter, books]);
+
+  const selectBooksFilter = (currentFilter: string) => {
+    setSelectedBooksFilter(currentFilter);
+    setCurrentPage(1);
+  };
 
   return {
     currentPage,
-    selectedSort,
+    selectedBooksFilter,
     filteredBooks,
     loading,
     pageSize,
@@ -64,6 +74,6 @@ export function useBookData() {
     setFilteredBooks,
     setLoading,
     setPageSize,
-    setSelectedSort,
+    selectBooksFilter,
   };
 }
